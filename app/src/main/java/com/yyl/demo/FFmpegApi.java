@@ -1,5 +1,7 @@
 package com.yyl.demo;
 
+import android.text.TextUtils;
+
 import java.util.ArrayList;
 
 /**
@@ -132,6 +134,7 @@ public class FFmpegApi {
      * 有报错就加 -strict -2
      */
     private void logo() {
+        if (TextUtils.isEmpty(logoPath))return;
         cmd.add("-i");
         cmd.add(logoPath);
         cmd.add("-filter_complex");

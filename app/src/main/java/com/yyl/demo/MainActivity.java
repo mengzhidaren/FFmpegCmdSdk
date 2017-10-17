@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                FFmpegApi api = Test.getTest1();
+                FFmpegApi api = Test.getTest2();
                 api.getCmd();
                 setCmdText(api.getString());
                 int code = ffmpeg.execffmpeg(api.getCmd(), ffmpegCallBack);
