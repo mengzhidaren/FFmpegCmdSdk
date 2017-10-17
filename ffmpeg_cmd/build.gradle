@@ -1,0 +1,49 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.novoda:bintray-release:0.3.4'
+    }
+}
+def siteUrl = 'https://github.com/mengzhidaren/FFmpegCmdSdk'   // 项目的主页
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+tasks.withType(Javadoc) {
+    options.encoding = "UTF-8"
+}
+dependencies {
+}
+publish {
+    userOrg = 'yuyunlongyyl' //用户所在组织
+    groupId = 'com.yyl.ffmpeg'// 包名
+    artifactId = 'ffmpeg_cmd' // library的名字
+    publishVersion = '1.0.0'// 版本
+    desc = 'ffmpeg_android_cmd  sdk ' // 描述
+    website = siteUrl
+}
