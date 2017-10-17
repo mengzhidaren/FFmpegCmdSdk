@@ -17,7 +17,7 @@ ffmpeg最好只运行一个进程线程
 
 # 截图
 
-<image src="./img/111.gif" width="400px"/>
+<image src="./img/222.gif" width="450px"/>
 
 ## 引入
 * Gradle
