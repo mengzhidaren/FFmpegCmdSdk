@@ -31,6 +31,7 @@ public class FFmpegApi {
     }
 
     public String[] getCmd() {
+        cmd.clear();
         cmd.add("ffmpeg");
 //        cmd.add("-loglevel");
 //        cmd.add("verbose");
@@ -64,7 +65,7 @@ public class FFmpegApi {
 
     /**
      * 剪切时间
-     * -ss 1开始时间(00:00:00) -t 2剪切时间20秒(00:00:20) -i 3视频源文件地址  4输出文件地址
+     * -ss 1开始时间(00:00:00) -t 2剪切时间20秒(00:00:20)
      * 在-i之前使用
      */
     private void catTime(String startTime, String saveTime) {

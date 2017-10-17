@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
         outputLayout = (LinearLayout) findViewById(R.id.command_output);
         scrollView = (ScrollView) findViewById(R.id.scrollview);
         ffmpeg = FFmpegUtils.getInstance();
-      //  ffmpeg.setDebugMode(true);
+        ffmpeg.setDebugMode(true);
     }
 
 
@@ -45,7 +45,6 @@ public class MainActivity extends Activity {
             @Override
             public void run() {
                 String cmd = editText.getText().toString();
-                addTextViewToLayout(cmd);
                 int code = ffmpeg.execffmpeg(cmd, ffmpegCallBack);
                 Log.i(tag, "code=" + code);
             }
@@ -60,9 +59,11 @@ public class MainActivity extends Activity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                addTextViewToLayout(Test.getTest1().getString());
-                int info = ffmpeg.execffmpeg(Test.getTest1().getCmd(), ffmpegCallBack);
-                Log.i(tag, "info=" + info);
+                FFmpegApi api = Test.getTest1();
+                api.getCmd();
+                setCmdText(api.getString());
+                int code = ffmpeg.execffmpeg(api.getCmd(), ffmpegCallBack);
+                Log.i(tag, "code=" + code);
             }
         }).start();
     }
@@ -72,7 +73,6 @@ public class MainActivity extends Activity {
             @Override
             public void run() {
                 String cmd = editText.getText().toString();
-                addTextViewToLayout(cmd);
                 String json = ffmpeg.execffprobe(cmd);
                 addTextViewToLayout(json);
             }
@@ -84,7 +84,7 @@ public class MainActivity extends Activity {
             @Override
             public void run() {
                 String cmd = "ffprobe -v quiet -print_format json -show_format -i " + Test.inputFile;
-                addTextViewToLayout(cmd);
+                setCmdText(cmd);
                 String json = ffmpeg.execffprobe(cmd);
                 addTextViewToLayout(json);
                 VideoBeanJson beanJson = VideoBeanJson.getJson(json);
@@ -96,6 +96,16 @@ public class MainActivity extends Activity {
     }
 
     public FFmpegCallBack ffmpegCallBack = new FFmpegCallBack() {
+        @Override
+        public void onStart() {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    outputLayout.removeAllViews();
+                }
+            });
+        }
+
         @Override
         public void onCallBackLog(String log) {
             addTextViewToLayout(log);
@@ -146,6 +156,15 @@ public class MainActivity extends Activity {
             @Override
             public void run() {
                 progressTV.setText("当前转码进度：" + progress);
+            }
+        });
+    }
+
+    private void setCmdText(final String cmdText) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                editText.setText(cmdText);
             }
         });
     }

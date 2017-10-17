@@ -7,6 +7,8 @@ package com.yyl.ffmpeg;
  */
 
 public interface FFmpegCallBack {
+    void onStart();
+
     void onCallBackLog(String log);
 
     void onCallBackPrint(String msg);

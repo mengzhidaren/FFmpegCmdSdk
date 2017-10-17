@@ -17,6 +17,7 @@ public class VideoBeanJson {
     }
 
     public long getTime() {
+        if (format==null)return 0;
         String duration = format.getDuration();
         float aFloat = Float.valueOf(duration);
         return (long) (aFloat * 1000);
