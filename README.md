@@ -1,6 +1,6 @@
 ----
-本库是基于RecyclerViewHeader的扩展。
-###ffmpeg  ffprobe 
+###
+###ffmpeg and ffprobe android command line tools
 
 # FFMPEG
 1. ffmpeg日志回调接口
