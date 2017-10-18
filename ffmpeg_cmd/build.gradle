@@ -16,8 +16,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 11
+        versionName "1.1"
 
     }
     buildTypes {
@@ -43,7 +43,7 @@ publish {
     userOrg = 'yuyunlongyyl' //用户所在组织
     groupId = 'com.yyl.ffmpeg'// 包名
     artifactId = 'ffmpeg_cmd' // library的名字
-    publishVersion = '1.0.0'// 版本
+    publishVersion = '1.0.1'// 版本
     desc = 'ffmpeg_android_cmd  sdk ' // 描述
     website = siteUrl
 }

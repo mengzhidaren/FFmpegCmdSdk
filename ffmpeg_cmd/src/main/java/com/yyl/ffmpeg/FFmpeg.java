@@ -19,11 +19,27 @@ public class FFmpeg {
 
     public static boolean isSport;
 
+    /**
+     * 只支持单线程
+     * @param cmd
+     * @param callBack
+     * @return
+     */
     public native int execffmpeg(String[] cmd, FFmpegCallBack callBack);
-
+    /**
+     * 支持单线程的stop
+     * @param cmd
+     * @param callBack
+     * @return
+     */
     public native void exitffmpeg();
 
-
+    /**
+     * 支持多线程
+     * @param cmd
+     * @param callBack
+     * @return
+     */
     public native String execffprobe(String[] cmd);
 
     public native void setDebugMode(boolean debugMode);
