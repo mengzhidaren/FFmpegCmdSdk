@@ -17,18 +17,19 @@ ffmpeg最好只运行一个进程线程
 
 # 截图
 
-<image src="./img/222.gif" width="450px"/>
+<image src="./img/222.gif" width="500px"/>
 
 ## 引入
 * Gradle
 ```groovy
-compile 'com.yyl.ffmpeg:ffmpeg_cmd:1.0.0'
+compile 'com.yyl.ffmpeg:ffmpeg_cmd:1.0.1'
 
 目前支持的库 只有 armeabi-v7a 其它的等我更新
 ```
 ## 开发
 ```
     
+   //ffprobe -v error -print_format json -select_streams v:0 -show_entries stream=width,height,index inputFile
     String cmd = "ffprobe -v quiet -print_format json -show_format -i " +inputFile;
     String json = FFmpegUtils.getInstance().execffprobe(cmd);
   
@@ -37,6 +38,7 @@ compile 'com.yyl.ffmpeg:ffmpeg_cmd:1.0.0'
     
 ```
 ### 参考代码
-本库的编译角本参考了https://github.com/wysaid/android-gpuimage-plus
+编译角本参考了https://github.com/wysaid
 感谢作者开源库。
-###编译版本号官网2017-10-17最新版本
+
+####编译版本号官网2017-10-17最新版本
