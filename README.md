@@ -11,7 +11,7 @@ ffmpeg最好只运行一个进程线程
 ```
 # FFPROBE
 1. ffprobe 只实现了json回调 
-2. ffprobe线程和ffmpeg线程独立运行
+2. ffprobe线程和ffmpeg线程独立运行1234
 # FFMPEG 
 
 
