@@ -1,45 +1,61 @@
 package com.yyl.ffmpeg;
 
+import android.util.Log;
+
 /**
  * Created by yuyunlong on 2017/10/11/011.
- * https://github.com/mengzhidaren
  */
+
 public class FFmpeg {
+//    static {
+//        try {
+//            System.loadLibrary("yylffmpeg");
+//            System.loadLibrary("yylffmpegjni");
+//            isSport = true;
+//        } catch (UnsatisfiedLinkError error) {
+//            isSport = false;
+//            error.printStackTrace();
+//            Log.i("yyl", "error");
+//        }
+//    }
 
-    static {
-        try {
-            System.loadLibrary("yylffmpeg");
-            System.loadLibrary("yylffmpegjni");
-            isSport = true;
-        } catch (UnsatisfiedLinkError error) {
-            isSport = false;
-        }
-
+    public FFmpeg() {
+        loadLibrariesOnce();
     }
 
-    public static boolean isSport;
+    private static volatile boolean mIsLibLoaded = false;
 
-    /**
-     * 只支持单线程
-     * @param cmd
-     * @param callBack
-     * @return
-     */
+    public static void loadLibrariesOnce() {
+        synchronized (FFmpeg.class) {
+            if (!mIsLibLoaded) {
+                try {
+                    System.loadLibrary("yylffmpeg");
+                    System.loadLibrary("yylffmpegjni");
+                    mIsLibLoaded = true;
+                    isSport = true;
+                } catch (UnsatisfiedLinkError error) {
+                    error.printStackTrace();
+                } catch (SecurityException error) {
+                    error.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static boolean isSport() {
+        loadLibrariesOnce();
+        return isSport;
+    }
+
+    private static boolean isSport;
+
+    public native void isShowLogcat(boolean show);
+
     public native int execffmpeg(String[] cmd, FFmpegCallBack callBack);
-    /**
-     * 支持单线程的stop
-     * @param cmd
-     * @param callBack
-     * @return
-     */
+
     public native void exitffmpeg();
 
-    /**
-     * 支持多线程
-     * @param cmd
-     * @param callBack
-     * @return
-     */
+
     public native String execffprobe(String[] cmd);
 
     public native void setDebugMode(boolean debugMode);

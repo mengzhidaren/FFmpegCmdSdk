@@ -35,7 +35,9 @@ public class MainActivity extends Activity {
         editText = (EditText) findViewById(R.id.command);
         outputLayout = (LinearLayout) findViewById(R.id.command_output);
         scrollView = (ScrollView) findViewById(R.id.scrollview);
+        Log.i(tag,"init");
         ffmpeg = FFmpegUtils.getInstance();
+        ffmpeg.isShowLogcat(true);
         ffmpeg.setDebugMode(true);
     }
 

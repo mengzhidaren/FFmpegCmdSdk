@@ -1,19 +1,36 @@
 package com.yyl.ffmpeg;
 
 
+import android.content.Context;
+
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by yuyunlong on 2017/10/16/016.
- * https://github.com/mengzhidaren
  */
 
 public class FFmpegUtils {
-    // private final Handler mainHandler;
     private final FFmpeg ffmpeg;
     private final ReentrantLock reentrantLock;
     private static FFmpegUtils utils;
     private static final Object lock = new Object();
+
+    public boolean isRun() {
+        return isRun;
+    }
+
+    private boolean isRun;
+
+    public static boolean isSport() {
+        return FFmpeg.isSport();
+    }
+
+    public static void checkLib(Context context) {
+        if (!isSport()) {
+            CpuArchHelper.checkCPU(context);
+        }
+    }
+
 
     public static FFmpegUtils getInstance() {
         if (utils == null) {
@@ -27,7 +44,6 @@ public class FFmpegUtils {
     }
 
     private FFmpegUtils() {
-        //  mainHandler = new Handler();
         ffmpeg = new FFmpeg();
         reentrantLock = new ReentrantLock();
     }
@@ -38,6 +54,7 @@ public class FFmpegUtils {
         String[] split = cmd.split(regulation);
         return execffmpeg(split, null);
     }
+
     public int execffmpeg(String cmd, FFmpegCallBack callBack) {
         String regulation = "[ \\t]+";
         String[] split = cmd.split(regulation);
@@ -49,14 +66,14 @@ public class FFmpegUtils {
     }
 
     public int execffmpeg(String[] cmd, FFmpegCallBack callBack) {
-        int code;
         reentrantLock.lock();
+        isRun = true;
         try {
-            code = ffmpeg.execffmpeg(cmd, callBack);
+            return ffmpeg.execffmpeg(cmd, callBack);
         } finally {
             reentrantLock.unlock();
+            isRun = false;
         }
-        return code;
     }
 
     public String execffprobe(String cmd) {
@@ -66,14 +83,12 @@ public class FFmpegUtils {
     }
 
     public String execffprobe(String[] cmd) {
-        String json;
         reentrantLock.lock();
         try {
-            json = ffmpeg.execffprobe(cmd);
+            return ffmpeg.execffprobe(cmd);
         } finally {
             reentrantLock.unlock();
         }
-        return json;
     }
 
     public void exitffmpeg() {
@@ -83,4 +98,9 @@ public class FFmpegUtils {
     public void setDebugMode(boolean debug) {
         ffmpeg.setDebugMode(debug);
     }
+
+    public void isShowLogcat(boolean showLogcat) {
+        ffmpeg.isShowLogcat(showLogcat);
+    }
+
 }

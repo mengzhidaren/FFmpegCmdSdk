@@ -3,7 +3,6 @@ package com.yyl.ffmpeg;
 
 /**
  * Created by yuyunlong on 2017/10/12/012.
- * https://github.com/mengzhidaren
  */
 
 public interface FFmpegCallBack {
