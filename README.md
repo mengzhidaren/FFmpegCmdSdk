@@ -22,7 +22,7 @@ ffmpeg最好只运行一个进程线程
 ## 引入
 * Gradle
 ```groovy
-compile 'com.yyl.ffmpeg:ffmpeg_cmd:1.0.1'
+compile 'com.yyl.ffmpeg:ffmpeg_cmd:1.0.3'
 
 目前支持的库 armeabi-v7a
  ndk {
