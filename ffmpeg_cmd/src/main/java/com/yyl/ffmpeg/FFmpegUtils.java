@@ -2,18 +2,28 @@ package com.yyl.ffmpeg;
 
 
 import android.content.Context;
+import android.util.Log;
 
+import java.util.Arrays;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by yuyunlong on 2017/10/16/016.
+ * <p>
+ * https://github.com/mengzhidaren
  */
-
 public class FFmpegUtils {
+
+    public static final int RESULT_STOP = 3;
+    public static final int RESULT_SUCCESS = 0;
+    public static final int RESULT_ERROR = 1;
+
     private final FFmpeg ffmpeg;
-    private final ReentrantLock reentrantLock;
+    private final ReentrantLock ffmpegLock;
+    private final ReentrantLock ffprobeLock;
     private static FFmpegUtils utils;
     private static final Object lock = new Object();
+    private boolean isShowLog;
 
     public boolean isRun() {
         return isRun;
@@ -21,14 +31,12 @@ public class FFmpegUtils {
 
     private boolean isRun;
 
-    public static boolean isSport() {
-        return FFmpeg.isSport();
+    public static boolean hasCompatibleCPU(Context context) {
+        return CpuUtils.hasCompatibleCPU(context);
     }
 
-    public static void checkLib(Context context) {
-        if (!isSport()) {
-            CpuArchHelper.checkCPU(context);
-        }
+    public static boolean isSport() {
+        return FFmpeg.isSport();
     }
 
 
@@ -44,8 +52,9 @@ public class FFmpegUtils {
     }
 
     private FFmpegUtils() {
+        ffmpegLock = new ReentrantLock();
+        ffprobeLock = new ReentrantLock();
         ffmpeg = new FFmpeg();
-        reentrantLock = new ReentrantLock();
     }
 
 
@@ -66,12 +75,15 @@ public class FFmpegUtils {
     }
 
     public int execffmpeg(String[] cmd, FFmpegCallBack callBack) {
-        reentrantLock.lock();
+        ffmpegLock.lock();
         isRun = true;
         try {
+            if (isShowLog) {
+                Log.i("FFMPEG", Arrays.toString(cmd));
+            }
             return ffmpeg.execffmpeg(cmd, callBack);
         } finally {
-            reentrantLock.unlock();
+            ffmpegLock.unlock();
             isRun = false;
         }
     }
@@ -83,11 +95,14 @@ public class FFmpegUtils {
     }
 
     public String execffprobe(String[] cmd) {
-        reentrantLock.lock();
+        ffprobeLock.lock();
         try {
+            if (isShowLog) {
+                Log.i("FFPROBE", Arrays.toString(cmd));
+            }
             return ffmpeg.execffprobe(cmd);
         } finally {
-            reentrantLock.unlock();
+            ffprobeLock.unlock();
         }
     }
 
@@ -100,6 +115,7 @@ public class FFmpegUtils {
     }
 
     public void isShowLogcat(boolean showLogcat) {
+        this.isShowLog = showLogcat;
         ffmpeg.isShowLogcat(showLogcat);
     }
 

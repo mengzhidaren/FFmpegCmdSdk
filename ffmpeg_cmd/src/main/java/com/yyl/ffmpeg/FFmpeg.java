@@ -1,6 +1,5 @@
 package com.yyl.ffmpeg;
 
-import android.util.Log;
 
 /**
  * Created by yuyunlong on 2017/10/11/011.
@@ -23,15 +22,14 @@ public class FFmpeg {
         loadLibrariesOnce();
     }
 
-    private static volatile boolean mIsLibLoaded = false;
+    private static volatile boolean isSport=false;
 
     public static void loadLibrariesOnce() {
         synchronized (FFmpeg.class) {
-            if (!mIsLibLoaded) {
+            if (!isSport) {
                 try {
                     System.loadLibrary("yylffmpeg");
                     System.loadLibrary("yylffmpegjni");
-                    mIsLibLoaded = true;
                     isSport = true;
                 } catch (UnsatisfiedLinkError error) {
                     error.printStackTrace();
@@ -47,7 +45,7 @@ public class FFmpeg {
         return isSport;
     }
 
-    private static boolean isSport;
+
 
     public native void isShowLogcat(boolean show);
 
