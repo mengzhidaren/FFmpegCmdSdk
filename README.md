@@ -42,3 +42,6 @@ compile 'com.yyl.ffmpeg:ffmpeg_cmd:1.2.0'
 ```
 
 ####编译版本号官网2018-01-02最新版本ffmpeg和h264
+
+## License
+Ruby on Rails is released under the [MIT License](https://opensource.org/licenses/MIT).
