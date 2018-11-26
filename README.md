@@ -1,7 +1,5 @@
-----
-###
-###ffmpeg and ffprobe android command line tools
-
+#ffmpeg and ffprobe android command line tools
+--
 ## FFMPEG(4.1.0   官网2018-11-23最新版本)
 1. ffmpeg日志回调接口
 2. ffmpeg增加监听百分比进度（需要获取转码后视频的总时间 具体看demo）
