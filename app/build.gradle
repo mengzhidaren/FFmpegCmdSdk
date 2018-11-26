@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    compile project(':ffmpeg_cmd')
-    compile 'com.google.code.gson:gson:2.2.4'
-//    compile 'com.yyl.ffmpeg:ffmpeg_cmd:1.2.0'
+//    implementation project(':ffmpeg_cmd')
+    implementation 'com.google.code.gson:gson:2.2.4'
+    implementation 'com.yyl.ffmpeg:ffmpeg_cmd:4.1.0'
 }
