@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 27
+//    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.yyl.demo"
         minSdkVersion 15
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         ndk {
@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-   // compile project(':ffmpeg_cmd')
+    compile project(':ffmpeg_cmd')
     compile 'com.google.code.gson:gson:2.2.4'
-    compile 'com.yyl.ffmpeg:ffmpeg_cmd:1.2.0'
+//    compile 'com.yyl.ffmpeg:ffmpeg_cmd:1.2.0'
 }
