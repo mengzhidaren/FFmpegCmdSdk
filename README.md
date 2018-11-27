@@ -36,7 +36,7 @@ implementation 'com.yyl.ffmpeg:ffmpeg_cmd:4.1.0'
     
 ```
 
-####编译版本号官网2018-11-26最新版本ffmpeg和h264
+####编译版本号官网2018-11-23最新版本ffmpeg和h264
 
 ### License
 [MIT License](https://opensource.org/licenses/MIT).
