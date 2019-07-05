@@ -1,6 +1,6 @@
 #ffmpeg and ffprobe android command line tools
 --
-## FFMPEG(4.1.0   官网2018-11-23最新版本)
+## FFMPEG(4.1.3   官网2019-07-05最新版本)
 1. ffmpeg日志回调接口
 2. ffmpeg增加监听百分比进度（需要获取转码后视频的总时间 具体看demo）
 ```
@@ -17,11 +17,11 @@ ffmpeg需要单例运行
 
 ## Gradle
 ```
-implementation 'com.yyl.ffmpeg:ffmpeg_cmd:4.1.0'
+implementation 'com.yyl.ffmpeg:ffmpeg_cmd:4.1.3'
 
-目前支持的库 armeabi-v7a   也可以参考build_android.sh脚本定制
+目前支持的库 armeabi-v7a  arm64-v8a 也可以参考build_android.sh脚本定制
  ndk {
-            abiFilters "armeabi-v7a"
+            abiFilters "armeabi-v7a","arm64-v8a" 
       }
 ```
 ## java Code
@@ -36,7 +36,7 @@ implementation 'com.yyl.ffmpeg:ffmpeg_cmd:4.1.0'
     
 ```
 
-####编译版本号官网2018-11-23最新版本ffmpeg和h264
+####编译版本号官网2019-07-05最新版本ffmpeg和h264
 
 ### License
 [MIT License](https://opensource.org/licenses/MIT).

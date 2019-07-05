@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
         outputLayout = (LinearLayout) findViewById(R.id.command_output);
         scrollView = (ScrollView) findViewById(R.id.scrollview);
         Log.i(tag, "init");
-        if (FFmpegUtils.hasCompatibleCPU(this) && FFmpegUtils.isSport()) {
+        if (FFmpegUtils.isSport()) {
             ffmpeg = FFmpegUtils.getInstance();
             ffmpeg.isShowLogcat(true);
             ffmpeg.setDebugMode(true);
