@@ -10,6 +10,21 @@ ffmpeg需要单例运行
 ## FFPROBE
 1. ffprobe 只实现了返回 json 回调 
 2. ffprobe线程和ffmpeg线程独立运行
+## 注意编解码器
+```
+如果编码器全开放 库文件就太大了
+解码器全部放开了 但是编码器只有aac 和 libx264  所以大部分手机基本都支持了
+--disable-encoders 
+--enable-encoder=aac 
+--enable-encoder=libx264 
+--enable-encoder=png 
+--enable-encoder=mjpeg
+
+如果对编码器有特殊需求的可以重新编译库文件
+重新裁剪编码器解决问题
+
+```
+
 
 ## review runing
 
